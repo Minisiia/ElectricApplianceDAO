@@ -21,7 +21,7 @@ public class Main {
     public static void main(String[] args) {
         IDAOFactory idaoFactory = DAOFactory.getInstance();
         ApplianceDAO applianceDAO = idaoFactory.getApplianceDAO();
-/*        Appliance computer = new Appliance("computer",250);
+       Appliance computer = new Appliance("computer",250);
         Appliance dishWasher = new Appliance("dishWasher",2500);
         Appliance kettle = new Appliance("kettle",2000);
         Appliance stove = new Appliance("stove",7000);
@@ -37,25 +37,29 @@ public class Main {
         applianceDAO.add(fridge);
         applianceDAO.add(iron);
         applianceDAO.add(tv);
-        applianceDAO.add(washer);*/
+        applianceDAO.add(washer);
 
-/*        applianceDAO.turnOn("computer");
+        System.out.println((char) 27 + "[34m" + "All electric appliances in the house:" + (char) 27 + "[38m");
+        List<Appliance> list = applianceDAO.getAll();
+        for (Appliance temp : list) System.out.println(temp);
+
+        System.out.println((char) 27 + "[34m" + "\nTurn on some appliances:" + (char) 27 + "[38m");
+        applianceDAO.turnOn("computer");
         applianceDAO.turnOn("stove");
         applianceDAO.turnOn("iron");
         applianceDAO.turnOn("fridge");
+        applianceDAO.turnOff("fridge");
+        list = applianceDAO.getAll();
+        for (Appliance temp : list) System.out.println(temp);
 
-        applianceDAO.turnOff("fridge");*/
-
-        List<Appliance> list = applianceDAO.getAll();
-        for (Appliance temp : list) System.out.println(temp);
-        System.out.println();
-        list = applianceDAO.sortByPower();
-        for (Appliance temp : list) System.out.println(temp);
-        System.out.println();
-        list = applianceDAO.getAppliance(200,2000);
-        for (Appliance temp : list) System.out.println(temp);
         System.out.println((char) 27 + "[34m" + "\nPower consumption: " + (char) 27 + "[38m" + applianceDAO.sumPower());
 
+        System.out.println((char) 27 + "[34m" + "\nSorted by power: " + (char) 27 + "[38m");
+        list = applianceDAO.sortByPower();
+        for (Appliance temp : list) System.out.println(temp);
 
+        System.out.println((char) 27 + "[34m" + "\nElectrical appliances with a power of less than 2000 and more than 200 watts: " + (char) 27 + "[38m");
+        list = applianceDAO.getAppliance(200,2000);
+        for (Appliance temp : list) System.out.println(temp);
     }
 }
